@@ -1,10 +1,14 @@
-FROM ubuntu:14.04
+FROM python:2.7-alpine
+MAINTAINER Bohdan Sukhov <macejiko@gmail.com>
+
 WORKDIR /user/local
+
 COPY requirements.txt requirements.txt
-RUN apt-get update \ 
-    && apt-get install -y libffi-dev libssl-dev libxml2-dev libxslt1-dev libjpeg8-dev zlib1g-dev \
-    git python-pip python-tk python-dev gcc \
-    && pip install -r requirements.txt && pip install robotframework-databaselibrary==0.6 \
-    && pip install robotframework-sshlibrary==2.1.1
+
+RUN apk add --no-cache libffi-dev libxml2-dev libxslt-dev python-dev musl-dev openssl-dev jpeg-dev zlib-dev && \
+    apk add --no-cache --virtual .build-deps git gcc make && \
+    pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir robotframework-databaselibrary==0.6 && \
+    apk del .build-deps
 
 

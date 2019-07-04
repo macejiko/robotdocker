@@ -1,6 +1,6 @@
 # Robot Docker repo
 
-> This repo describes executor for Robot Framework tests
+> This repo describes executor for Robot Framework tests. Based on python alpine image
 
 # Build
 
@@ -26,11 +26,12 @@ docker run -v ${PATH_TO_TESTS}:/user/local -it ${ROBOTDOCKER_IMAGE} bash -c "pyb
     volumes:
       - ${PATH_TO_TESTS}:/user/local
     command: >
-      bash -c "
+      sh -c "
       pybot test_cases/"
 ```
 
 # Future plans
 
-- Make base image as some python2.7 image instead of Ubuntu14.04
+- Make image for python 3
+- Add entrypoint
 
