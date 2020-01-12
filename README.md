@@ -1,21 +1,23 @@
-# Robot Docker repo
+# Robot Docker
 
-> This repo describes executor for Robot Framework tests. Based on python alpine image
+Executor for Robot Framework tests. Based on python alpine image
+
+> Avaliable for python2(2.7) and python3(3.7.4)
 
 # Build
 
 ```bash
-docker build -t robotdocker .
+docker build -t robotdocker <pythonX>
 ```
 
-# Run
+# Execution Examples
 
-## Template
+## via Run
 
 For UI test execution Selenium Grid should be configured first
 
 ```bash
-docker run -v ${PATH_TO_TESTS}:/user/local -it ${ROBOTDOCKER_IMAGE} bash -c "pybot [OPTIONS] ${PATH_TO_TEST_CASES}"
+docker run -v ${PATH_TO_TESTS}:/user/local -it ${ROBOTDOCKER_IMAGE} bash -c "robot/pybot [OPTIONS] ${PATH_TO_TEST_CASES}"
 ```
 
 ## via Compose
@@ -27,11 +29,10 @@ docker run -v ${PATH_TO_TESTS}:/user/local -it ${ROBOTDOCKER_IMAGE} bash -c "pyb
       - ${PATH_TO_TESTS}:/user/local
     command: >
       sh -c "
-      pybot test_cases/"
+      robot/pabot test_cases/"
 ```
 
 # Future plans
 
-- Make image for python 3
 - Add entrypoint
 
